@@ -4,7 +4,7 @@ name := "jacoco4sbt"
 
 organization := "io.sphere.de.johoop"
 
-version := "2.1.5-fork-1.0.0"
+version := "2.1.5-fork-1.1.0-SNAPSHOT"
 
 resolvers += "Sonatype Release" at "https://oss.sonatype.org/content/repositories/releases"
 
