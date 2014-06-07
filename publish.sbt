@@ -1,8 +1,7 @@
-publishTo := { 
-  val qualifier = "sbt-plugin-" + (if (version.value contains "-SNAPSHOT") "snapshots" else "releases")
-  Some(Resolver.url(qualifier, new URL(s"http://repo.scala-sbt.org/scalasbt/$qualifier"))(Resolver.ivyStylePatterns))
+publishTo := {
+  Some(Resolver.file("file", new File(Path.userHome.absolutePath + "/schleichardt.github.io/jvmrepo"))(Resolver.mavenStylePatterns))
 }
 
-publishMavenStyle := false
+publishMavenStyle := true
 
 publishArtifact in Test := false

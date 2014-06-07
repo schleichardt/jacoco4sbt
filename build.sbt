@@ -2,17 +2,17 @@ sbtPlugin := true
 
 name := "jacoco4sbt"
 
-organization := "de.johoop"
+organization := "io.sphere.de.johoop"
 
-version := "2.1.5"
+version := "2.1.5-fork-1.0.0"
 
 resolvers += "Sonatype Release" at "https://oss.sonatype.org/content/repositories/releases"
 
 scalaVersion := "2.10.4"
 
 libraryDependencies ++= Seq(
-  "org.jacoco" % "org.jacoco.core" % "0.7.0.201403182114" artifacts(Artifact("org.jacoco.core", "jar", "jar")),
-  "org.jacoco" % "org.jacoco.report" % "0.7.0.201403182114" artifacts(Artifact("org.jacoco.report", "jar", "jar")),
+  "org.jacoco" % "org.jacoco.core" % "0.7.1.201405082137" artifacts(Artifact("org.jacoco.core", "jar", "jar")),
+  "org.jacoco" % "org.jacoco.report" % "0.7.1.201405082137" artifacts(Artifact("org.jacoco.report", "jar", "jar")),
   "org.specs2" %% "specs2" % "2.3.11" % "test",
   "org.mockito" % "mockito-all" % "1.9.5" % "test",
   "org.pegdown" % "pegdown" % "1.2.1" % "test")

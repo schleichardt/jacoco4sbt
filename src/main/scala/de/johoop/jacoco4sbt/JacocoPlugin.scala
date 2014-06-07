@@ -63,11 +63,11 @@ object JacocoPlugin extends Plugin {
   object itJacoco extends SharedSettings with Reporting with Merging with SavingData with Instrumentation with IntegrationTestKeys {
     lazy val srcConfig = IntegrationTest
 
-    lazy val conditionalMerge = (outputDirectory, outputDirectory in jacoco.Config, streams, mergeReports) map conditionalMergeAction
-    lazy val forceMerge = (outputDirectory, outputDirectory in jacoco.Config, streams) map mergeAction
+    lazy val conditionalMerge = (outputDirectory in Config, outputDirectory in jacoco.Config, streams, mergeReports) map conditionalMergeAction
+    lazy val forceMerge = (outputDirectory in Config, outputDirectory in jacoco.Config, streams) map mergeAction
 
     override def settings = super.settings ++ Seq(
-      report <<= report dependsOn conditionalMerge,
+      report  in Config <<= (report  in Config) dependsOn conditionalMerge,
       merge <<= forceMerge,
       mergeReports := true)
   }
@@ -77,7 +77,7 @@ object JacocoPlugin extends Plugin {
 
     def settings = Seq(ivyConfigurations += Config) ++ Seq(
       libraryDependencies +=
-        "org.jacoco" % "org.jacoco.agent" % "0.7.0.201403182114" % "jacoco" artifacts(Artifact("org.jacoco.agent", "jar", "jar"))
+        "org.jacoco" % "org.jacoco.agent" % "0.7.1.201405082137" % "jacoco" artifacts(Artifact("org.jacoco.agent", "jar", "jar"))
     ) ++ inConfig(Config)(Defaults.testSettings ++ JacocoDefaults.settings ++ Seq(
       classesToCover <<= (classDirectory in Compile, includes, excludes) map filterClassesToCover,
 
@@ -86,7 +86,7 @@ object JacocoPlugin extends Plugin {
         if (forked) Seq(s"-Djacoco-agent.destfile=${out / "jacoco.exec" absolutePath}") else Seq()
       },
 
-      outputDirectory := crossTarget.value / Config.name,
+      outputDirectory in Config := crossTarget.value / Config.name,
 
       definedTests <<= definedTests in srcConfig,
       definedTestNames <<= definedTestNames in srcConfig,
